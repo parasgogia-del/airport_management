@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Airport Shops</title>
+
+    <!-- Link your downloaded CSS file -->
+   <link rel="stylesheet" href="/assets/airplane_mode/css/style.css">
+
+</head>
+<body>
+
+    <nav>
+        <div class="brand">
+            ✈️ AirMall
+        </div>
+
+        <div class="menu">
+            <a href="/">Home</a>
+            <a href="/shops">Shops</a>
+            <a href="/airports">Airports</a>
+            <a href="/about">About</a>
+            <a class="button" href="/contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <main style="padding:80px 30px;">
+
+        <section style="text-align:center;margin-bottom:40px;">
+            <h1>Airport Shops Directory</h1>
+
+            <p>
+                Browse retail spaces across our partner airports — check
+                availability, rent and shop details.
+            </p>
+
+            <br>
+
+            <span class="label">
+                {{ shops|length }} Listing{{ 's' if shops|length != 1 else '' }}
+            </span>
+
+        </section>
+
+
+        <div class="flex three">
+
+            {% for shop in shops %}
+
+            <div>
+
+                <article class="card">
+
+                    <header>
+
+                        <h3>{{ shop.shop_name }}</h3>
+
+                        {% if shop.status=="Available" %}
+                        <span class="label success">
+                            {{ shop.status }}
+                        </span>
+
+                        {% elif shop.status=="Occupied" %}
+                        <span class="label warning">
+                            {{ shop.status }}
+                        </span>
+
+                        {% else %}
+                        <span class="label error">
+                            {{ shop.status }}
+                        </span>
+
+                        {% endif %}
+
+                    </header>
+
+                    <section>
+
+                        <p>
+                            <strong>Shop Number:</strong>
+                            {{ shop.shop_number }}
+                        </p>
+
+                        <p>
+                            <strong>Airport:</strong>
+                            {{ shop.airport }}
+                        </p>
+
+                        <p>
+                            <strong>Rent:</strong>
+                            ₹{{ shop.rent_amount }}/month
+                        </p>
+
+                    </section>
+
+                    <footer>
+
+                        <a class="button" href="/{{ shop.route }}">
+                            View Details
+                        </a>
+
+                    </footer>
+
+                </article>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+    <footer style="text-align:center;padding:20px;">
+        © 2026 AirMall. All rights reserved.
+    </footer>
+
+</body>
+
+</html>

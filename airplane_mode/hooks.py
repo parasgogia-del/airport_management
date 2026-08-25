@@ -153,6 +153,7 @@ app_license = "mit"
 # 	"all": [
 # 		"airplane_mode.tasks.all"
 # 	],
+
 # 	"daily": [
 # 		"airplane_mode.tasks.daily"
 # 	],
@@ -163,7 +164,7 @@ app_license = "mit"
 # 		"airplane_mode.tasks.weekly"
 # 	],
 # 	"monthly": [
-# 		"airplane_mode.tasks.monthly"
+# 		"airplane_mode.tasks.monthly",
 # 	],
 # }
 
@@ -255,4 +256,16 @@ app_license = "mit"
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
+
+scheduler_events = {
+    "monthly": [
+        "airplane_mode.airport_shop_management.scheduler.send_rent_reminders"
+    ]
+} 
+
+fixtures = [
+    {
+        "dt": "Shop Type"
+    }
+]
 

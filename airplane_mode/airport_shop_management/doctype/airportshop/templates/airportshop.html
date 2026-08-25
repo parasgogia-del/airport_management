@@ -1,0 +1,166 @@
+{% set contracts = frappe.get_all(
+    "Shop Rental Contract",
+    filters={
+        "airport_shop": doc.name,
+        "status": "Active"
+    },
+    fields=["tenant", "contract_start_date", "contract_end_date"]
+) %}
+
+{% if contracts %}
+    {% set contract = contracts[0] %}
+    {% set tenant = frappe.get_doc("Shop Tenant", contract.tenant) %}
+{% endif %}
+
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ doc.shop_name }}</title>
+
+    <link rel="stylesheet" href="/assets/airplane_mode/css/style.css">
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="brand">
+            ✈️ AirMall
+        </div>
+
+        <div class="menu">
+            <a href="/shops">← Back to Shops</a>
+        </div>
+
+    </nav>
+
+    <main style="padding:80px 30px; max-width:900px; margin:auto;">
+
+        <h1>{{ doc.shop_name }}</h1>
+
+        <p>
+            Shop No. {{ doc.shop_number }} |
+            {{ doc.airport }}
+        </p>
+
+        <br>
+
+        {% if doc.status=="Available" %}
+        <span class="label success">
+            {{ doc.status }}
+        </span>
+
+        {% elif doc.status=="Occupied" %}
+        <span class="label warning">
+            {{ doc.status }}
+        </span>
+
+        {% else %}
+        <span class="label error">
+            {{ doc.status }}
+        </span>
+        {% endif %}
+
+        <br><br>
+
+        <article class="card">
+
+            <header>
+                <h2>Shop Details</h2>
+            </header>
+
+            <section>
+
+                <table>
+
+                    <tr>
+                        <th>Airport</th>
+                        <td>{{ doc.airport }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Shop Number</th>
+                        <td>{{ doc.shop_number }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Area</th>
+                        <td>{{ doc.area }} sq ft</td>
+                    </tr>
+
+                    <tr>
+                        <th>Monthly Rent</th>
+                        <td>₹{{ doc.rent_amount }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Contract Start</th>
+                        <td>
+                            {% if contract %}
+                                {{ contract.contract_start_date }}
+                            {% else %}
+                                Not Available
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Contract End</th>
+                        <td>
+                            {% if contract %}
+                                {{ contract.contract_end_date }}
+                            {% else %}
+                                Not Available
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Tenant</th>
+                        <td>
+                            {% if contract %}
+                                {{ tenant.tenant_name }}
+                            {% else %}
+                                Not Assigned
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                </table>
+
+            </section>
+
+            <footer>
+
+                {% if doc.status=="Available" %}
+
+                <a class="button success"
+                    href="/shop-lead-form/new?shop={{ doc.name }}">
+                    I'm Interested in this Shop
+                </a>
+
+                {% else %}
+
+                <button disabled>
+                    This shop is currently occupied
+                </button>
+
+                {% endif %}
+
+            </footer>
+
+        </article>
+
+    </main>
+
+    <footer style="text-align:center;padding:20px;">
+        © 2026 AirMall. All rights reserved.
+    </footer>
+
+</body>
+
+</html>

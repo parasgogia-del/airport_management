@@ -1,0 +1,26 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Shop Type",
+  "enabled": 1,
+  "modified": "2026-07-06 11:10:10.950054",
+  "name": "vadnf5vb9t",
+  "type_name": "Stall"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Shop Type",
+  "enabled": 1,
+  "modified": "2026-07-06 11:11:11.250429",
+  "name": "vt8j08mijb",
+  "type_name": "Walk-through"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Shop Type",
+  "enabled": 1,
+  "modified": "2026-07-06 11:11:31.112700",
+  "name": "03fanqdl0r",
+  "type_name": "Normal"
+ }
+]
